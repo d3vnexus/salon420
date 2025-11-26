@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salon 420 - Best Hair Salon in Homagama, Sri Lanka | Professional Hair Cut & Styling</title>
+    <meta name="description"
+        content="Salon 420 - Premier hair salon in Homagama, Sri Lanka. Expert haircuts, beard styling, coloring, oil massage, kids haircuts & tattoos. Visit us at Kendalanda, Homagama. Call 075 862 5077">
+    <meta name="keywords"
+        content="salon in homagama, salon 420, salon in sri lanka, hair salon homagama, hair cut homagama, best salon sri lanka, beard styling, hair coloring, tattoo homagama">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&family=Passion+One:wght@400;600;700&family=Bungee:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        h2,
+        h3 {
+            font-family: 'Passion One', serif;
+        }
+
+        h1 {
+            font-family: 'Bungee', serif;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide.fade-out {
+            animation: snapVanish 0.8s ease-out forwards;
+        }
+
+        @keyframes snapVanish {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.95);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0.8);
+                filter: blur(10px);
+            }
+        }
+
+        .btn-primary {
+            background: #fff;
+            color: #000;
+            padding: 16px 40px;
+            border: 2px solid #fff;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            background: #000;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            border: 1px solid #333;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: #fff;
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+        }
+
+        .price-card {
+            background: #0a0a0a;
+            border: 2px solid #222;
+            transition: all 0.3s ease;
+        }
+
+        .price-card:hover {
+            border-color: #fff;
+            transform: scale(1.05);
+        }
+
+        .team-member {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .team-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover .team-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 0px;
+            padding: 20px 0;
+            scrollbar-width: none;
+        }
+
+        .gallery-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-item {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+            width: 300px;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                overflow-x: visible;
+            }
+
+            .gallery-item {
+                width: 100%;
+            }
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .section-title {
+            font-family: 'Passion One', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <img src="img/logo420.png" alt="Salon 420 Logo" class="w-20 h-12">
+                    <span
+                        class="logo-text  bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">SALON
+                        420</span>
+                </div>
+
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="hover:text-gray-300 transition font-semibold">Home</a>
+                    <a href="#about" class="hover:text-gray-300 transition font-semibold">About</a>
+                    <a href="#services" class="hover:text-gray-300 transition font-semibold">Services</a>
+                    <a href="#pricing" class="hover:text-gray-300 transition font-semibold">Pricing</a>
+                    <a href="#team" class="hover:text-gray-300 transition font-semibold">Team</a>
+                    <a href="#gallery" class="hover:text-gray-300 transition font-semibold">Gallery</a>
+                    <a href="#contact" class="hover:text-gray-300 transition font-semibold">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-white text-2xl" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu fixed top-0 right-0 h-full w-64 bg-black border-l border-gray-800 md:hidden z-50">
+            <div class="p-6">
+                <button class="text-white text-2xl mb-8" onclick="toggleMenu()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="flex flex-col space-y-6">
+                    <a href="#home" onclick="toggleMenu()"
+                        class="text-white hover:text-gray-300 transition font-semibold">Home</a>
+                    <a href="#about" onclick="toggleMenu()"
+                        class="text-white hover:text-gray-300 transition font-semibold">About</a>
+                    <a href="#services" onclick="toggleMenu()"
+                        class="text-white hover:text-gray-300 transition font-semibold">Services</a>
+                    <a href="#pricing" onclick="toggleMenu()"
+                        class="text-white hover:text-gray-300 transition font-semibold">Pricing</a>
+                    <a href="#team" onclick="toggleMenu()"
+                        class="text-white hover:text-gray-300 transition font-semibold">Team</a>
+                    <a href="#gallery" onclick="toggleMenu()"
+                        class="text-white hover:text-gray-300 transition font-semibold">Gallery</a>
+                    <a href="#contact" onclick="toggleMenu()"
+                        class="text-white hover:text-gray-300 transition font-semibold">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen overflow-hidden">
+        <!-- Desktop: Image Slides -->
+        <div class="hidden md:block">
+            <div class="hero-slide active"
+                style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/hero1.png') center/cover">
+            </div>
+            <div class="hero-slide"
+                style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/hero2.jpeg') center/cover">
+            </div>
+            <div class="hero-slide"
+                style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/hero3.jpeg') center/cover">
+            </div>
+        </div>
+
+        <!-- Mobile: Background Video -->
+        <div class="md:hidden absolute inset-0">
+            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
+                <source src="video/hero.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        </div>
+
+        <div class="absolute inset-0 flex items-center justify-center text-center z-10">
+            <div class="container mx-auto px-4">
+                <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
+                    REDEFINE YOUR<br>STYLE
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-300 max-w-2xl mx-auto">
+                    Experience Premium Grooming at Homagama's Finest Salon
+                </p>
+                <a
+                    href="https://wa.me/94758625077?text=I%20want%20to%20book%20an%20appointment%20.%20What%20time%20is%20available%3F">
+                    <button class="btn-primary rounded-full">
+                        <i class="fas fa-calendar-alt mr-2"></i>MAKE APPOINTMENT
+                    </button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="section-title">Who We Are</h2>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-6 mt-8">
+                        Salon 420 is Homagama's premier destination for men's grooming and style. Located in the heart
+                        of Kendalanda, we've been transforming looks and boosting confidence since our inception.
+                    </p>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                        Our team of expert stylists combines traditional barbering techniques with modern trends to
+                        deliver exceptional results. Whether you're looking for a classic cut or a bold new style, we've
+                        got you covered.
+                    </p>
+                    <div class="grid grid-cols-3 gap-6 mt-8">
+                        <div class="text-center">
+                            <div class="text-4xl font-black text-white mb-2">500+</div>
+                            <div class="text-gray-400">Happy Clients</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-black text-white mb-2">5+</div>
+                            <div class="text-gray-400">Expert Stylists</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-black text-white mb-2">100%</div>
+                            <div class="text-gray-400">Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600"
+                        alt="Salon 420 Interior" class="rounded-lg shadow-2xl">
+                    <div class="absolute -bottom-6 -left-6 w-48 h-48 bg-white opacity-10 rounded-lg -z-10"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gradient-to-b from-black to-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="section-title inline-block">Our Services</h2>
+                <p class="text-gray-400 text-lg mt-8">Premium grooming services tailored to your style</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="service-card p-8 rounded-lg text-center">
+                    <div class="text-6xl mb-6 flex justify-center">
+                        <!-- Beard SVG Icon -->
+                        <img src="img/hair-cut.png" alt="Beard Styling Icon" class="w-16 h-16 invert brightness-0">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Hair Cut</h3>
+                    <p class="text-gray-400">Expert precision cuts tailored to your face shape and style preferences</p>
+                </div>
+
+                <div class="service-card p-8 rounded-lg text-center">
+                    <div class="text-6xl mb-6 flex justify-center">
+                        <!-- Beard SVG Icon -->
+                        <img src="img/beard.png" alt="Beard Styling Icon" class="w-16 h-16 invert brightness-0">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Beard Styling</h3>
+                    <p class="text-gray-400">Professional beard trimming and shaping for the perfect look</p>
+                </div>
+
+                <div class="service-card p-8 rounded-lg text-center">
+                    <div class="text-6xl mb-6 flex justify-center">
+                        <!-- Beard SVG Icon -->
+                        <img src="img/color.png" alt="Beard Styling Icon" class="w-16 h-16 invert brightness-0">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Hair Coloring</h3>
+                    <p class="text-gray-400">Transform your look with our premium coloring services</p>
+                </div>
+
+                <div class="service-card p-8 rounded-lg text-center">
+                    <div class="text-6xl mb-6 flex justify-center">
+                        <!-- Beard SVG Icon -->
+                        <img src="img/massage.png" alt="Beard Styling Icon" class="w-16 h-16 invert brightness-0">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Oil Massage</h3>
+                    <p class="text-gray-400">Relaxing head and scalp massage for ultimate rejuvenation</p>
+                </div>
+
+                <div class="service-card p-8 rounded-lg text-center">
+                    <div class="text-6xl mb-6 flex justify-center">
+                        <!-- Beard SVG Icon -->
+                        <img src="img/cutting.png" alt="Beard Styling Icon" class="w-16 h-16 invert brightness-0">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Kids Hair Cut</h3>
+                    <p class="text-gray-400">Gentle and fun haircuts for our youngest clients</p>
+                </div>
+
+                <div class="service-card p-8 rounded-lg text-center">
+                    <div class="text-6xl mb-6 flex justify-center">
+                        <!-- Beard SVG Icon -->
+                        <img src="img/tatoo.png" alt="Beard Styling Icon" class="w-16 h-16 invert brightness-0">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Tattoo</h3>
+                    <p class="text-gray-400">Custom tattoo designs by our skilled artists</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-20 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="section-title inline-block">Why Choose Us</h2>
+                <p class="text-gray-400 text-lg mt-8">Experience the Salon 420 difference</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-award text-black text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Expert Stylists</h3>
+                    <p class="text-gray-400">Trained professionals with years of experience</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-clock text-black text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Flexible Hours</h3>
+                    <p class="text-gray-400">Open 7 days a week for your convenience</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-star text-black text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Premium Products</h3>
+                    <p class="text-gray-400">Only the finest grooming products used</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-heart text-black text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Customer Care</h3>
+                    <p class="text-gray-400">Your satisfaction is our top priority</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-gradient-to-b from-gray-900 to-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="section-title inline-block">Our Pricing</h2>
+                <p class="text-gray-400 text-lg mt-8">Affordable luxury for everyone</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="price-card p-8 rounded-lg">
+                    <div class="text-center mb-6">
+                        <div class="text-6xl mb-6 flex justify-center">
+                            <!-- Beard SVG Icon -->
+                            <img src="img/hair-cut.png" alt="Beard Styling Icon" class="w-16 h-16 invert brightness-0">
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Hair Cut</h3>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-black mb-2">Rs. 1500</div>
+                        <p class="text-gray-400">Starting from</p>
+                    </div>
+                </div>
+
+                <div class="price-card p-8 rounded-lg">
+                    <div class="text-center mb-6">
+                        <div class="text-6xl mb-6 flex justify-center">
+                            <!-- Beard SVG Icon -->
+                            <img src="img/beard.png" alt="Beard Styling Icon" class="w-16 h-16 invert brightness-0">
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Beard Styling</h3>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-black mb-2">Rs. 700</div>
+                        <p class="text-gray-400">Starting from</p>
+                    </div>
+                </div>
+
+                <div class="price-card p-8 rounded-lg">
+                    <div class="text-center mb-6">
+                        <div class="text-6xl mb-6 flex justify-center">
+                            <!-- Beard SVG Icon -->
+                            <img src="img/color.png" alt="Beard Styling Icon" class="w-16 h-16 invert brightness-0">
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Hair Coloring</h3>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-black mb-2">Rs. 1500</div>
+                        <p class="text-gray-400">Starting from</p>
+                    </div>
+                </div>
+
+                <div class="price-card p-8 rounded-lg">
+                    <div class="text-center mb-6">
+                        <div class="text-6xl mb-6 flex justify-center">
+                            <!-- Beard SVG Icon -->
+                            <img src="img/massage.png" alt="Beard Styling Icon" class="w-16 h-16 invert brightness-0">
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Oil Massage</h3>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-black mb-2">Rs. 400</div>
+                        <p class="text-gray-400">Starting from</p>
+                    </div>
+                </div>
+
+                <div class="price-card p-8 rounded-lg">
+                    <div class="text-center mb-6">
+                        <div class="text-6xl mb-6 flex justify-center">
+                            <!-- Beard SVG Icon -->
+                            <img src="img/cutting.png" alt="Beard Styling Icon" class="w-16 h-16 invert brightness-0">
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Kids Hair Cut</h3>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-black mb-2">Rs. 800</div>
+                        <p class="text-gray-400">Starting from</p>
+                    </div>
+                </div>
+
+                <div class="price-card p-8 rounded-lg">
+                    <div class="text-center mb-6">
+                        <div class="text-6xl mb-6 flex justify-center">
+                            <!-- Beard SVG Icon -->
+                            <img src="img/tatoo.png" alt="Beard Styling Icon" class="w-16 h-16 invert brightness-0">
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Tattoo</h3>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-black mb-2">Custom</div>
+                        <p class="text-gray-400">Contact us</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-20 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="section-title inline-block">Our Team</h2>
+                <p class="text-gray-400 text-lg mt-8">Meet our skilled and experienced professionals</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="text-center">
+                    <div class="relative mb-6 inline-block">
+                        <img src="img/t1.jpg" alt="Sahan Rasanjaya Hewage" class="rounded-full mx-auto"
+                            style="width: 200px; height: 200px; object-fit: cover; border: 4px solid #fff;">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Sahan Rasanjaya Hewage</h3>
+                    <p class="text-white font-semibold mb-3">Senior Hair Stylist</p>
+                    <p class="text-gray-400 text-sm max-w-xs mx-auto">
+                        10+ years of experience in hair cutting and coloring
+                    </p>
+                </div>
+
+                <div class="text-center">
+                    <div class="relative mb-6 inline-block">
+                        <img src="img/t2.jpg" alt="Hashan" class="rounded-full mx-auto"
+                            style="width: 200px; height: 200px; object-fit: cover; border: 4px solid #fff;">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Hashan</h3>
+                    <p class="text-white font-semibold mb-3">Hair Stylist</p>
+                    <p class="text-gray-400 text-sm max-w-xs mx-auto">
+                        Expert in balayage, highlights, and creative coloring
+                    </p>
+                </div>
+
+                <div class="text-center">
+                    <div class="relative mb-6 inline-block">
+                        <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=300&h=300&fit=crop&crop=face"
+                            alt="Alex Chen" class="rounded-full mx-auto"
+                            style="width: 200px; height: 200px; object-fit: cover; border: 4px solid #fff;">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Shanaka Wijebandara</h3>
+                    <p class="text-white font-semibold mb-3">Hair Stylist</p>
+                    <p class="text-gray-400 text-sm max-w-xs mx-auto">
+                        Creative nail art and luxury manicure/pedicure services
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Hide scrollbar for mobile carousel */
+        .mobile-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .mobile-carousel {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+        }
+    </style>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-gradient-to-b from-gray-900 to-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="section-title inline-block">Our Work</h2>
+                <p class="text-gray-400 text-lg mt-8">Check out our latest transformations</p>
+            </div>
+
+            <!-- Mobile Carousel (visible only on mobile) -->
+            <div class="md:hidden mobile-carousel flex gap-4 overflow-x-auto snap-x snap-mandatory px-4">
+                <div class="flex-shrink-0 w-[70%] aspect-[3/4] overflow-hidden rounded-lg snap-center">
+                    <img loading="lazy" src="img/p1.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-shrink-0 w-[70%] aspect-[3/4] overflow-hidden rounded-lg snap-center">
+                    <img loading="lazy" src="img/p2.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-shrink-0 w-[70%] aspect-[3/4] overflow-hidden rounded-lg snap-center">
+                    <img loading="lazy" src="img/p3.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-shrink-0 w-[70%] aspect-[3/4] overflow-hidden rounded-lg snap-center">
+                    <img loading="lazy" src="img/p4.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-shrink-0 w-[70%] aspect-[3/4] overflow-hidden rounded-lg snap-center">
+                    <img loading="lazy" src="img/p5.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-shrink-0 w-[70%] aspect-[3/4] overflow-hidden rounded-lg snap-center">
+                    <img loading="lazy" src="img/p6.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-shrink-0 w-[70%] aspect-[3/4] overflow-hidden rounded-lg snap-center">
+                    <img loading="lazy" src="img/p7.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-shrink-0 w-[70%] aspect-[3/4] overflow-hidden rounded-lg snap-center">
+                    <img loading="lazy" src="img/p8.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-shrink-0 w-[70%] aspect-[3/4] overflow-hidden rounded-lg snap-center">
+                    <img loading="lazy" src="img/p10.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-shrink-0 w-[70%] aspect-[3/4] overflow-hidden rounded-lg snap-center">
+                    <img loading="lazy" src="img/p11.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-shrink-0 w-[70%] aspect-[3/4] overflow-hidden rounded-lg snap-center">
+                    <img loading="lazy" src="img/p12.jpg" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <!-- Desktop Gallery Grid (visible only on desktop) -->
+            <div id="gallery-grid" class="hidden md:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- First 4 images (always visible) -->
+                <div class="aspect-[3/4] overflow-hidden rounded-lg">
+                    <img loading="lazy" src="img/p1.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="aspect-[3/4] overflow-hidden rounded-lg">
+                    <img loading="lazy" src="img/p2.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="aspect-[3/4] overflow-hidden rounded-lg">
+                    <img loading="lazy" src="img/p3.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="aspect-[3/4] overflow-hidden rounded-lg">
+                    <img loading="lazy" src="img/p4.jpg" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Hidden images -->
+                <div class="hidden more-img aspect-[3/4] overflow-hidden rounded-lg">
+                    <img loading="lazy" src="img/p5.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="hidden more-img aspect-[3/4] overflow-hidden rounded-lg">
+                    <img loading="lazy" src="img/p6.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="hidden more-img aspect-[3/4] overflow-hidden rounded-lg">
+                    <img loading="lazy" src="img/p7.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="hidden more-img aspect-[3/4] overflow-hidden rounded-lg">
+                    <img loading="lazy" src="img/p8.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="hidden more-img aspect-[3/4] overflow-hidden rounded-lg">
+                    <img loading="lazy" src="img/p10.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="hidden more-img aspect-[3/4] overflow-hidden rounded-lg">
+                    <img loading="lazy" src="img/p11.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="hidden more-img aspect-[3/4] overflow-hidden rounded-lg">
+                    <img loading="lazy" src="img/p12.jpg" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <!-- Show More Button (Desktop only) -->
+            <div class="hidden md:block text-center mt-10">
+                <button id="showMoreBtn"
+                    class="px-6 py-3 bg-green-500 hover:bg-green-600 text-black font-semibold rounded-lg">
+                    Show More
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById("showMoreBtn").addEventListener("click", function () {
+            document.querySelectorAll(".more-img").forEach(el => el.classList.remove("hidden"));
+            this.style.display = "none";
+        });
+    </script>
+
+    <!-- Video Showcase Section -->
+    <section id="videos" class="py-20 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="section-title inline-block">Video Showcase</h2>
+                <p class="text-gray-400 text-lg mt-8">Watch our barbering in action</p>
+            </div>
+
+            <div
+                class="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory scrollbar-hide lg:grid lg:grid-cols-4 lg:overflow-visible">
+                <div class="flex-shrink-0 w-[280px] lg:w-full snap-center">
+                    <div
+                        class="aspect-[9/16] bg-gray-900 rounded-lg overflow-hidden relative group cursor-pointer video-container">
+                        <video class="w-full h-full object-cover" loop muted playsinline>
+                            <source src="video/hero.mp4" type="video/mp4">
+                        </video>
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-40 opacity-100 group-hover:opacity-0 transition-opacity flex items-center justify-center play-icon">
+                            <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-shrink-0 w-[280px] lg:w-full snap-center">
+                    <div
+                        class="aspect-[9/16] bg-gray-900 rounded-lg overflow-hidden relative group cursor-pointer video-container">
+                        <video class="w-full h-full object-cover" loop muted playsinline>
+                            <source src="video/v2.mp4" type="video/mp4">
+                        </video>
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-40 opacity-100 group-hover:opacity-0 transition-opacity flex items-center justify-center play-icon">
+                            <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-shrink-0 w-[280px] lg:w-full snap-center">
+                    <div
+                        class="aspect-[9/16] bg-gray-900 rounded-lg overflow-hidden relative group cursor-pointer video-container">
+                        <video class="w-full h-full object-cover" loop muted playsinline>
+                            <source src="video/v3.mp4" type="video/mp4">
+                        </video>
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-40 opacity-100 group-hover:opacity-0 transition-opacity flex items-center justify-center play-icon">
+                            <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-shrink-0 w-[280px] lg:w-full snap-center">
+                    <div
+                        class="aspect-[9/16] bg-gray-900 rounded-lg overflow-hidden relative group cursor-pointer video-container">
+                        <video class="w-full h-full object-cover" loop muted playsinline>
+                            <source src="video/v4.mp4" type="video/mp4">
+                        </video>
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-40 opacity-100 group-hover:opacity-0 transition-opacity flex items-center justify-center play-icon">
+                            <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Video play/pause on click and hover
+        document.querySelectorAll('.video-container').forEach(container => {
+            const video = container.querySelector('video');
+            const playIcon = container.querySelector('.play-icon');
+
+            // Click to play/pause
+            container.addEventListener('click', () => {
+                if (video.paused) {
+                    video.play();
+                    playIcon.style.opacity = '0';
+                } else {
+                    video.pause();
+                    playIcon.style.opacity = '1';
+                }
+            });
+
+            // Auto-play on hover (desktop only)
+            if (window.innerWidth >= 1024) {
+                container.addEventListener('mouseenter', () => {
+                    video.play();
+                });
+
+                container.addEventListener('mouseleave', () => {
+                    video.pause();
+                    video.currentTime = 0;
+                });
+            }
+        });
+    </script>
+
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-black border-t border-gray-800 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="img/logo420.png" alt="Salon 420 Logo" class="w-20 h-12">
+                        <span class="logo-text text-2xl">SALON 420</span>
+                    </div>
+                    <p class="text-gray-400">Homagama's premier destination for men's grooming and style.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <div class="flex flex-col space-y-2">
+                        <a href="#home" class="text-gray-400 hover:text-white transition">Home</a>
+                        <a href="#about" class="text-gray-400 hover:text-white transition">About</a>
+                        <a href="#services" class="text-gray-400 hover:text-white transition">Services</a>
+                        <a href="#pricing" class="text-gray-400 hover:text-white transition">Pricing</a>
+                        <a href="#gallery" class="text-gray-400 hover:text-white transition">Gallery</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact Info</h3>
+                    <div class="flex flex-col space-y-3">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-map-marker-alt text-white mt-1"></i>
+                            <span class="text-gray-400">No 207, Kendalanda, Homagama,<br>Homagama, Sri Lanka</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-phone text-white"></i>
+                            <a href="tel:0758625077" class="text-gray-400 hover:text-white transition">075 862 5077</a>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-white"></i>
+                            <span class="text-gray-400">info@salon420.lk</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Opening Hours</h3>
+                    <div class="text-gray-400 space-y-2">
+                        <p>Monday - Saturday</p>
+                        <p class="font-bold text-white">9:00 AM - 8:00 PM</p>
+                        <p class="mt-4">Sunday</p>
+                        <p class="font-bold text-white">10:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-center md:text-left mb-4 md:mb-0">
+                        &copy; 2024 Salon 420. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white transition text-2xl">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition text-2xl">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition text-2xl">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition text-2xl">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/94758625077?text=I%20want%20to%20book%20an%20appointment%20.%20What%20time%20is%20available%3F"
+        target="_blank"
+        class="fixed bottom-6 right-6 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition z-50">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Hero slider with snap vanish animation
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const totalSlides = slides.length;
+
+        function changeSlide() {
+            const current = slides[currentSlide];
+            current.classList.add('fade-out');
+
+            setTimeout(() => {
+                current.classList.remove('active', 'fade-out');
+                currentSlide = (currentSlide + 1) % totalSlides;
+                slides[currentSlide].classList.add('active');
+            }, 800);
+        }
+
+        setInterval(changeSlide, 4000);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for fade-in effect
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Gallery touch scroll for mobile
+        const gallery = document.querySelector('.gallery-container');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        if (gallery) {
+            gallery.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX - gallery.offsetLeft;
+                scrollLeft = gallery.scrollLeft;
+            });
+
+            gallery.addEventListener('mouseleave', () => {
+                isDown = false;
+            });
+
+            gallery.addEventListener('mouseup', () => {
+                isDown = false;
+            });
+
+            gallery.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - gallery.offsetLeft;
+                const walk = (x - startX) * 2;
+                gallery.scrollLeft = scrollLeft - walk;
+            });
+        }
+
+        // Add hover effect to service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Animate numbers in stats section
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.innerHTML = value + (element.dataset.suffix || '');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Trigger stats animation when visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statElements = entry.target.querySelectorAll('.text-4xl');
+                    statElements.forEach((el, index) => {
+                        const values = [500, 5, 100];
+                        const suffixes = ['+', '+', '%'];
+                        el.dataset.suffix = suffixes[index];
+                        animateValue(el, 0, values[index], 2000);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('#about .grid.grid-cols-3');
+        if (statsSection) {
+            statsObserver.observe(statsSection.parentElement);
+        }
+    </script>
+    <script>
+    // Disable right-click
+    document.addEventListener("contextmenu", function(e){
+        e.preventDefault();
+        alert("Right-click is disabled on this page.");
+    });
+
+    // Disable certain key combinations
+    document.addEventListener("keydown", function(e) {
+        // F12
+        if(e.key === "F12") {
+            e.preventDefault();
+            alert("F12 is disabled.");
+        }
+        // Ctrl+U
+        if(e.ctrlKey && e.key.toLowerCase() === "u") {
+            e.preventDefault();
+            alert("Viewing source is disabled.");
+        }
+        // Ctrl+Shift+I (DevTools)
+        if(e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "i") {
+            e.preventDefault();
+            alert("DevTools is disabled.");
+        }
+        // Ctrl+Shift+J (Console)
+        if(e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "j") {
+            e.preventDefault();
+            alert("DevTools is disabled.");
+        }
+    });
+</script>
+
+</body>
+
+</html>
